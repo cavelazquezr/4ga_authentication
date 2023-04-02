@@ -1,7 +1,58 @@
-/*
-    home.css: This website contains selectors only used in home.css
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&family=Source+Sans+Pro&display=swap');
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: #f5f6f6;
+}
+
+p {
+    color: rgb(116, 116, 116);
+}
+
+.section-title {
+    color: #0f6666;
+    font-size: 1.25rem;
+    font-family: 'Rubik', sans-serif !important;
+}
+
+.toolstep-title {
+    color: #0f6666;
+    font-size: 1.25rem;
+    line-height: 1.25rem;
+    font-family: 'Rubik', sans-serif !important;
+}
+
+.input-label {
+    color: #747474;
+    font-size: 0.8rem;
+    font-family: 'Rubik', sans-serif !important;
+}
+
+.btn {
+    height: 2rem;
+    border-radius: 1.25rem;
+    padding: 0rem 1rem;
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+.btn-ctm-primary {
+    background-color: #0f6666;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-ctm-primary:hover {
+    background-color: #161032;
+    color: white;
+    font-weight: bold;
+}
+
+.brand-name {
+    font-family: 'Rubik', sans-serif !important;
+    letter-spacing: -0.07rem;
+}
+
+.asasd {
+    color: #b7ebeb;
+}
