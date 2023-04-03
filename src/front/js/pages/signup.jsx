@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { ErrorAlert } from "../component/ErrorAlert.jsx";
+
+import { createUser } from "../services/user.js";
 
 export const Signup = () => {
 	const [form, setForm] = useState({});
@@ -24,6 +27,12 @@ export const Signup = () => {
 			}
 		}
 	}, [form]);
+
+	const handleClick = async (e) => {
+		e.preventDefault();
+		// createUser(form)
+		toast.success("Registro exitoso😎");
+	};
 
 	const handleInputChange = (e) => {
 		setForm({ ...form, [e.target.id]: e.target.value });
@@ -55,7 +64,7 @@ export const Signup = () => {
 	};
 
 	const handleBlurLastInput = () => {
-		const { fullname, email, password, confirm_password } = form;
+		const { firstname, lastname, email, password, confirm_password } = form;
 		if (password !== confirm_password) {
 			setError({
 				...error,
@@ -69,7 +78,7 @@ export const Signup = () => {
 			});
 			return;
 		}
-		if (!fullname || !email || !password) {
+		if (!firstname || !lastname || !email || !password) {
 			setError({ ...error, status: true, message: "Please fill in all fields" });
 			return;
 		}
@@ -141,10 +150,16 @@ export const Signup = () => {
 				<p>Please fill in the inputs to create your account.</p>
 				{error.status && <ErrorAlert emoji={"👉"} message={error.message} />}
 				<div className="mb-3">
-					<label htmlFor="fullname" className="form-label input-label">
-						Full name
+					<label htmlFor="firstname" className="form-label input-label">
+						First name
 					</label>
-					<input type="text" className="form-control" id="fullname" onChange={handleInputChange} />
+					<input type="text" className="form-control" id="firstname" onChange={handleInputChange} />
+				</div>
+				<div className="mb-3">
+					<label htmlFor="lastname" className="form-label input-label">
+						Last name
+					</label>
+					<input type="text" className="form-control" id="lastname" onChange={handleInputChange} />
 				</div>
 				<div className="mb-3">
 					<label htmlFor="email" className="form-label input-label">
@@ -183,7 +198,7 @@ export const Signup = () => {
 					/>
 				</div>
 				<div className="d-flex justify-content-center">
-					<button className="btn btn-ctm-primary" disabled={buttonIsDisabled}>
+					<button className="btn btn-ctm-primary" onClick={handleClick}>
 						Create Account
 					</button>
 				</div>
