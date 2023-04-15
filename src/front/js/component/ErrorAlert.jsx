@@ -11,6 +11,7 @@ export const ErrorAlert = (props) => {
 		margin: "1rem 0rem",
 		lineHeight: "0",
 		height: "2rem",
+		width: "100%"
 	};
 
 	return (

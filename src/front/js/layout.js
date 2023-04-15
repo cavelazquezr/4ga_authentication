@@ -6,6 +6,7 @@ import { Home } from "./pages/home.jsx";
 import { Signup } from "./pages/signup.jsx";
 import { Login } from "./pages/login.jsx";
 import { Private } from "./pages/private.jsx";
+import { PrivateError } from "./pages/privateError.jsx";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -27,6 +28,7 @@ const Layout = () => {
                         <Route element={<Signup />} path="/signup" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<Private />} path="/private" />
+                        <Route element={<PrivateError />} path="/error" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

@@ -1,6 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ErrorAlert } from "../component/ErrorAlert.jsx";
+import toast from "react-hot-toast";
+
+import { loginUser } from "../services/user.js";
+import { Context } from "../store/appContext.js";
 
 export const Login = () => {
 	const [form, setForm] = useState({});
@@ -9,6 +14,8 @@ export const Login = () => {
 		status: false,
 		message: "",
 	});
+	const navigate = useNavigate();
+	const { store, actions } = useContext(Context);
 
 	useEffect(() => {
 		if (form.password && form.email) {
@@ -19,6 +26,13 @@ export const Login = () => {
 			}
 		}
 	}, [form]);
+
+	const handleClick = async (event) => {
+		event.preventDefault();
+		await loginUser(form);
+		actions.login();
+		navigate("/");
+	};
 
 	const handleInputChange = (e) => {
 		setForm({ ...form, [e.target.id]: e.target.value });
@@ -98,7 +112,7 @@ export const Login = () => {
 
 	return (
 		<div className="container-fluid">
-			<div className="container col-6" style={centralContainerStyle}>
+			<div className="container-xxl col-xxl-6 container col-12" style={centralContainerStyle}>
 				<Link to={"/"} style={goBackStyle}>
 					<i className="fa-solid fa-arrow-left"></i>
 					Go back to dashboard
@@ -133,7 +147,7 @@ export const Login = () => {
 					/>
 				</div>
 				<div className="d-flex justify-content-center">
-					<button className="btn btn-ctm-primary" disabled={buttonIsDisabled}>
+					<button className="btn btn-ctm-primary" onClick={handleClick} disabled={buttonIsDisabled}>
 						Log in
 					</button>
 				</div>

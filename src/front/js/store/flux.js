@@ -1,3 +1,5 @@
+import { getCurrentUser } from "../services/user";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -13,7 +15,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			authentication: {
+				status: false,
+				currentUser: {},
+			},
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -22,14 +28,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getMessage: async () => {
-				try{
+				try {
 					// fetching data from the backend
 					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
 					const data = await resp.json()
 					setStore({ message: data.message })
 					// don't forget to return something, that is how the async resolves
 					return data;
-				}catch(error){
+				} catch (error) {
 					console.log("Error loading message from backend", error)
 				}
 			},
@@ -46,7 +52,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
-			}
+			},
+			login: async () => {
+				try {
+					const data = await getCurrentUser();
+					setStore({
+						authentication: {
+							status: true,
+							currentUser: data.result
+						}
+					});
+				} catch (e) {
+					console.log(e)
+				}
+			},
+			logout: () => {
+				localStorage.removeItem("jwt-token");
+				setStore({
+					authentication: {
+						status: false,
+						currentUser: {},
+					}
+				});
+			},
 		}
 	};
 };

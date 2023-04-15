@@ -5,7 +5,8 @@ import "../../styles/home.css";
 import { ToolStep } from "../component/ToolStep.jsx";
 
 export const Home = () => {
-	const { store, actions } = useContext(Context);
+	const { store } = useContext(Context);
+	const { authentication } = store;
 
 	const centralContainerStyle = {
 		backgroundColor: "white",
@@ -17,7 +18,7 @@ export const Home = () => {
 
 	return (
 		<div className="container-fluid">
-			<div className="container col-6" style={centralContainerStyle}>
+			<div className="container-xxl col-xxl-6 container col-12" style={centralContainerStyle}>
 				<p className="section-title">Welcome to the Authentication System</p>
 				<p>
 					If this is your first time, you have to register on our platform in order to test the authentication system
@@ -48,7 +49,7 @@ export const Home = () => {
 							"If you are successfully authenticated, you will be able to access the secret component by clicking on the button below. 😱"
 						}
 						buttonLabel={"Try it"}
-						buttonPath="/private"
+						buttonPath={authentication.status ? "/private" : "/error"}
 					/>
 				</div>
 			</div>

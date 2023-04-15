@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { ErrorAlert } from "../component/ErrorAlert.jsx";
@@ -12,6 +13,7 @@ export const Signup = () => {
 		status: false,
 		message: "",
 	});
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (form.password && form.confirm_password) {
@@ -30,7 +32,8 @@ export const Signup = () => {
 
 	const handleClick = async (e) => {
 		e.preventDefault();
-		// createUser(form)
+		createUser(form);
+		navigate("/");
 		toast.success("Registro exitoso😎");
 	};
 
@@ -141,7 +144,7 @@ export const Signup = () => {
 
 	return (
 		<div className="container-fluid">
-			<div className="container col-6" style={centralContainerStyle}>
+			<div className="container-xxl col-xxl-6 container col-12" style={centralContainerStyle}>
 				<Link to={"/"} style={goBackStyle}>
 					<i className="fa-solid fa-arrow-left"></i>
 					Go back to dashboard
@@ -198,7 +201,7 @@ export const Signup = () => {
 					/>
 				</div>
 				<div className="d-flex justify-content-center">
-					<button className="btn btn-ctm-primary" onClick={handleClick}>
+					<button className="btn btn-ctm-primary" disabled={buttonIsDisabled} onClick={handleClick}>
 						Create Account
 					</button>
 				</div>
